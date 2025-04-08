@@ -1,8 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { CalculatorSelector } from '../components/CalculatorSelector';
-import { useStore } from '../store/useStore';
-import { calculators } from '../calculators';
 import { TestWrapper } from './TestWrapper';
 
 // Mock the entire component instead of its dependencies

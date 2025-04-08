@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NumberInput, Select, Button, Group, Text, Stack, Card } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { formatNumber } from '../utils/formatters';
 
 type UnitSystem = 'metric' | 'imperial';
 
@@ -100,6 +101,7 @@ export function BMICalculator() {
               placeholder="Enter height"
               {...form.getInputProps('height')}
               min={1}
+              thousandSeparator=","
             />
             
             <NumberInput
@@ -107,9 +109,19 @@ export function BMICalculator() {
               placeholder="Enter weight"
               {...form.getInputProps('weight')}
               min={1}
+              thousandSeparator=","
             />
             
             <Group justify="flex-end">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  form.reset();
+                  setResult(null);
+                }}
+              >
+                Clear
+              </Button>
               <Button type="submit">Calculate</Button>
             </Group>
           </Stack>
@@ -117,7 +129,7 @@ export function BMICalculator() {
         
         {result !== null && (
           <Stack mt="md">
-            <Text fw={700}>BMI: {result.bmi.toFixed(1)}</Text>
+            <Text fw={700}>BMI: {formatNumber(result.bmi, 1)}</Text>
             <Text>Category: {result.category}</Text>
           </Stack>
         )}

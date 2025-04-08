@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NumberInput, Button, Group, Text, Stack, Card } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { formatCurrency } from '../utils/formatters';
 
 interface LoanFormValues {
   loanAmount: number;
@@ -8,8 +9,14 @@ interface LoanFormValues {
   termYears: number;
 }
 
+interface LoanResult {
+  monthlyPayment: number;
+  totalPayment: number;
+  totalInterest: number;
+}
+
 export function LoanCalculator() {
-  const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
+  const [result, setResult] = useState<LoanResult | null>(null);
 
   const form = useForm<LoanFormValues>({
     initialValues: {
@@ -30,11 +37,18 @@ export function LoanCalculator() {
     const numberOfPayments = termYears * 12;
     
     // Monthly payment formula: P = L[r(1+r)^n]/[(1+r)^n-1]
-    const payment = loanAmount * 
+    const monthlyPayment = loanAmount * 
       (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
       (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
     
-    setMonthlyPayment(payment);
+    const totalPayment = monthlyPayment * numberOfPayments;
+    const totalInterest = totalPayment - loanAmount;
+    
+    setResult({
+      monthlyPayment,
+      totalPayment,
+      totalInterest
+    });
   };
 
   return (
@@ -49,6 +63,7 @@ export function LoanCalculator() {
               placeholder="Enter loan amount"
               {...form.getInputProps('loanAmount')}
               min={1}
+              thousandSeparator=","
             />
             
             <NumberInput
@@ -57,7 +72,7 @@ export function LoanCalculator() {
               {...form.getInputProps('interestRate')}
               min={0.01}
               step={0.01}
-              precision={2}
+              decimalScale={2}
             />
             
             <NumberInput
@@ -69,16 +84,25 @@ export function LoanCalculator() {
             />
             
             <Group justify="flex-end">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  form.reset();
+                  setResult(null);
+                }}
+              >
+                Clear
+              </Button>
               <Button type="submit">Calculate</Button>
             </Group>
           </Stack>
         </form>
         
-        {monthlyPayment !== null && (
+        {result !== null && (
           <Stack mt="md">
-            <Text fw={700}>Monthly Payment: ${monthlyPayment.toFixed(2)}</Text>
-            <Text>Total Payment: ${(monthlyPayment * form.values.termYears * 12).toFixed(2)}</Text>
-            <Text>Total Interest: ${(monthlyPayment * form.values.termYears * 12 - form.values.loanAmount).toFixed(2)}</Text>
+            <Text fw={700}>Monthly Payment: {formatCurrency(result.monthlyPayment)}</Text>
+            <Text>Total Payment: {formatCurrency(result.totalPayment)}</Text>
+            <Text>Total Interest: {formatCurrency(result.totalInterest)}</Text>
           </Stack>
         )}
       </Stack>

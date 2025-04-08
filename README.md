@@ -1,54 +1,54 @@
-# React + TypeScript + Vite
+# Calculators
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application providing various calculators for everyday use.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Multiple Calculators:**
+  - Loan Calculator: Calculate monthly payments, total payments, and interest
+  - Unit Converter: Convert between various units (length, weight, temperature)
+  - BMI Calculator: Calculate Body Mass Index and determine weight category
 
-## Expanding the ESLint configuration
+- **User-Friendly Interface:**
+  - Clean, responsive design that works on both mobile and desktop
+  - Dark/light mode toggle
+  - Easy calculator switching
+  - Formatted numbers with thousand separators
+  - Clear button to reset each calculator
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technologies Used
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- React 19
+- TypeScript
+- Vite (for fast development and building)
+- Mantine UI (for components and theming)
+- Zustand (for state management)
+- Vitest and Testing Library (for testing)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Scripts
+
+- `npm run dev`: Start the development server
+- `npm run build`: Build for production
+- `npm run lint`: Run ESLint
+- `npm test`: Run tests
+- `npm run preview`: Preview the production build locally
+
+## Design Decisions
+
+- Used Mantine for UI components to ensure a consistent, accessible design
+- Implemented responsive layout for all screen sizes
+- Added input validation to prevent calculation errors
+- Followed a modular approach with separate calculator components
+- Applied consistent formatting for readability

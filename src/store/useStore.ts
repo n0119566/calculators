@@ -13,7 +13,7 @@ interface CalculatorState {
 export const useStore = create<CalculatorState>((set) => ({
   selectedCalculator: 'loan',
   themeMode: 'light',
-  setSelectedCalculator: (calculator) => set({ selectedCalculator }),
+  setSelectedCalculator: (selectedCalculator) => set({ selectedCalculator }),
   setThemeMode: (themeMode) => set({ themeMode }),
   toggleThemeMode: () => set((state) => ({ 
     themeMode: state.themeMode === 'light' ? 'dark' : 'light' 

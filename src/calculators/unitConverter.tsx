@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TextInput, Select, Button, Group, Text, Stack, Card } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { formatNumber } from '../utils/formatters';
 
 type ConversionType = 'length' | 'weight' | 'temperature';
 type LengthUnit = 'meters' | 'kilometers' | 'miles' | 'feet' | 'inches';
@@ -201,6 +202,15 @@ export function UnitConverter() {
             </Group>
             
             <Group justify="flex-end">
+              <Button 
+                variant="outline" 
+                onClick={() => {
+                  form.reset();
+                  setResult(null);
+                }}
+              >
+                Clear
+              </Button>
               <Button type="submit">Convert</Button>
             </Group>
           </Stack>
@@ -208,7 +218,7 @@ export function UnitConverter() {
         
         {result !== null && (
           <Text mt="md" fw={700}>
-            Result: {parseFloat(form.values.inputValue)} {form.values.fromUnit} = {result.toFixed(6)} {form.values.toUnit}
+            Result: {formatNumber(parseFloat(form.values.inputValue), 6)} {form.values.fromUnit} = {formatNumber(result, 6)} {form.values.toUnit}
           </Text>
         )}
       </Stack>

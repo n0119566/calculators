@@ -1,49 +1,58 @@
 import { 
   MantineProvider, 
   AppShell,
-  Header,
   Group,
   Text,
   Container,
-  ColorSchemeScript,
+  createTheme,
 } from '@mantine/core';
 import { ThemeToggle } from './components/ThemeToggle';
 import { CalculatorSelector } from './components/CalculatorSelector';
 import { CalculatorDisplay } from './components/CalculatorDisplay';
-import { useStore } from './store/useStore';
 import '@mantine/core/styles.css';
 
+// Create a custom theme with better spacing for calculators
+const theme = createTheme({
+  fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+  primaryColor: 'blue',
+  components: {
+    Card: {
+      defaultProps: {
+        withBorder: true,
+        shadow: 'sm',
+        radius: 'md',
+        p: 'lg',
+      },
+    },
+  },
+});
+
 function App() {
-  const { themeMode } = useStore();
-
   return (
-    <>
-      <ColorSchemeScript />
-      <MantineProvider defaultColorScheme={themeMode}>
-        <AppShell
-          header={{ height: 60 }}
-          padding="md"
-        >
-          <AppShell.Header>
-            <Container size="lg">
-              <Group h="100%" px="md" justify="space-between">
-                <Text fw={700} size="lg">Multi Calculator</Text>
-                <Group>
-                  <ThemeToggle />
-                </Group>
+    <MantineProvider theme={theme}>
+      <AppShell
+        header={{ height: 60 }}
+        padding="md"
+      >
+        <AppShell.Header pt="md" pb="md">
+          <Container size="lg">
+            <Group h="100%" px="md" justify="space-between">
+              <Text fw={700} size="lg">Calculators</Text>
+              <Group>
+                <ThemeToggle />
               </Group>
-            </Container>
-          </AppShell.Header>
+            </Group>
+          </Container>
+        </AppShell.Header>
 
-          <AppShell.Main>
-            <Container size="lg" py="xl">
-              <CalculatorSelector />
-              <CalculatorDisplay />
-            </Container>
-          </AppShell.Main>
-        </AppShell>
-      </MantineProvider>
-    </>
+        <AppShell.Main>
+          <Container size="lg" py="xl">
+            <CalculatorSelector />
+            <CalculatorDisplay />
+          </Container>
+        </AppShell.Main>
+      </AppShell>
+    </MantineProvider>
   );
 }
 
