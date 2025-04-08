@@ -1,6 +1,6 @@
-# Calculators
+# QuickCalculators
 
-A modern web application providing various calculators for everyday use.
+A modern web application providing fast, convenient calculators for everyday use.
 
 ## Features
 

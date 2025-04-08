@@ -37,7 +37,7 @@ function App() {
         <AppShell.Header pt="md" pb="md">
           <Container size="lg">
             <Group h="100%" px="md" justify="space-between">
-              <Text fw={700} size="lg">Calculators</Text>
+              <Text fw={700} size="lg">QuickCalculators</Text>
               <Group>
                 <ThemeToggle />
               </Group>
