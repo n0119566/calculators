@@ -102,6 +102,7 @@ export function BMICalculator() {
               {...form.getInputProps('height')}
               min={1}
               thousandSeparator=","
+              inputMode="numeric"
             />
             
             <NumberInput
@@ -110,6 +111,7 @@ export function BMICalculator() {
               {...form.getInputProps('weight')}
               min={1}
               thousandSeparator=","
+              inputMode="numeric"
             />
             
             <Group justify="flex-end">

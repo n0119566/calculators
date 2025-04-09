@@ -184,6 +184,7 @@ export function UnitConverter() {
             <TextInput
               label="Value"
               placeholder="Enter value to convert"
+              inputMode="numeric"
               {...form.getInputProps('inputValue')}
             />
             

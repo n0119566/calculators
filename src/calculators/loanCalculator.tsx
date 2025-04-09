@@ -64,6 +64,7 @@ export function LoanCalculator() {
               {...form.getInputProps('loanAmount')}
               min={1}
               thousandSeparator=","
+              inputMode="numeric"
             />
             
             <NumberInput
@@ -73,6 +74,7 @@ export function LoanCalculator() {
               min={0.01}
               step={0.01}
               decimalScale={2}
+              inputMode="decimal"
             />
             
             <NumberInput
@@ -81,6 +83,7 @@ export function LoanCalculator() {
               {...form.getInputProps('termYears')}
               min={1}
               max={50}
+              inputMode="numeric"
             />
             
             <Group justify="flex-end">
